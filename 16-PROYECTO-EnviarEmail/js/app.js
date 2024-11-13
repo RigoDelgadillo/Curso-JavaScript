@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', function(){
 
+
+    email = {
+        email: '',
+        asunto: '',
+        mensaje: ''
+    }
+
     // Seleccionar los elementos de la interfaz
 
     const inputEmail = document.querySelector('#email');
@@ -11,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function(){
     inputEmail.addEventListener('blur', validar);
     inputAsunto.addEventListener('blur', validar);
     inputMensaje.addEventListener('blur', validar);
+
+    
     
     function validar(e) {
 
@@ -25,6 +34,12 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         limpiarAlerta(e.target.parentElement); // Se elimina la alerta que esta en ese lugar como referencia
+
+        // Cuando se validan los campos se guardan en el objeto
+
+        email[e.target.name] = e.target.value.trim().toLowerCase();
+
+        comprobarEmail();
     }
 
     function mostrarAlerta(mensaje, referencia){ // Funcion para mostrar alerta, generamos el elemento HTML y lo agregamos en el lugar que indique cuando manden a llamar la funcion
@@ -51,5 +66,14 @@ document.addEventListener('DOMContentLoaded', function(){
     function validarEmail(email){
         const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
         const resultado = regex.test(email);
+
+        return resultado;
     }
+
+    function comprobarEmail() {
+        console.log(Object.values(email).includes(''));
+    }
+
+
+
 });
